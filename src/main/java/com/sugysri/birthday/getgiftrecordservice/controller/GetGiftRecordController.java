@@ -9,7 +9,7 @@ import com.sugysri.birthday.getgiftrecordservice.models.GiftRecord;
 import com.sugysri.birthday.getgiftrecordservice.service.GetGiftRecordService;
 
 @RestController
-//@RequestMapping("/giftRecord")
+@RequestMapping("/gift")
 @CrossOrigin(origins = "*",allowedHeaders = "*")
 public class GetGiftRecordController {
 	@Autowired
