@@ -8,8 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.cache.annotation.Cacheable;
+
 @Entity
 @Table(name = "sugysri_gift_records")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class GiftRecordItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gift_id_generator")
