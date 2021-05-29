@@ -5,13 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "sugysri_gift_records")
 public class GiftRecordItem {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gift_id_generator")
+	@SequenceGenerator(name = "gift_id_generator", sequenceName = "gift_record_sequence", allocationSize = 1, initialValue = 100)
 	private int s_no;
 	@Column(name = "name")
 	private String name;

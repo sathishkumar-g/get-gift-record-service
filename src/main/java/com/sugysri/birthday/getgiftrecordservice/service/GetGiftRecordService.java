@@ -18,28 +18,27 @@ public class GetGiftRecordService {
 	public GiftRecord getGiftRecord() {
 		GiftRecord giftRecord = null;
 		List<GiftRecordItem> giftRecords = null;
-		/*
-		 * giftRecord = new GiftRecord(new ArrayList<GiftRecordItem>( Arrays.asList(new
-		 * GiftRecordItem(1,"sathish","varakalpet","cuddalore","software",1000,"toys",
-		 * "na"))));
-		 */
 		giftRecords = giftRecordRepository.findAll();
 		giftRecord = new GiftRecord(giftRecords);
 		return giftRecord;
 	}
 
-	/*
-	 * public GiftRecord addGiftRecord() {
-	 * 
-	 * }
-	 * 
-	 * public GiftRecord editGiftRecord() {
-	 * 
-	 * }
-	 * 
-	 * public GiftRecord deleteGiftRecord() {
-	 * 
-	 * }
-	 */
+	public GiftRecordItem editGiftRecord(GiftRecordItem giftRecordItem) {
+		return giftRecordRepository.saveAndFlush(giftRecordItem);
+	}
+
+	public void deleteGiftRecord(GiftRecordItem giftRecordItem) {
+		giftRecordRepository.delete(giftRecordItem);
+		giftRecordRepository.flush();
+	}
+
+	public GiftRecordItem addGiftRecord(GiftRecordItem giftRecordItem) {
+		return giftRecordRepository.saveAndFlush(giftRecordItem);
+	}
+
+	public void deleteGiftRecords(List<GiftRecordItem> giftRecords) {
+		giftRecordRepository.deleteAll(giftRecords);
+		giftRecordRepository.flush();
+	}
 
 }
