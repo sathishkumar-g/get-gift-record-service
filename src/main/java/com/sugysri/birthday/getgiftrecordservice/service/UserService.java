@@ -19,7 +19,7 @@ public class UserService {
 	@Autowired
 	private CacheManager cacheManager;
 
-	@Cacheable(value = "userDetailsCache", key = "#userDetails.id", unless = "#result=null")
+	@Cacheable(value = "userDetailsCache", key = "#userDetails.userName", unless = "#result=null")
 	public UserDetails getUserRecord(UserDetails userDetails) {
 		return userRepository.findByUserNameAndPassword(userDetails.getUserName(), userDetails.getPassword());
 	}
@@ -32,7 +32,7 @@ public class UserService {
 
 	public void addToCache(UserDetails userDetails) {
 		Cache cache = cacheManager.getCache("userDetailsCache");
-		cache.putIfAbsent(userDetails.getId(), userDetails);
+		cache.putIfAbsent(userDetails.getUserName(), userDetails);
 	}
 
 }
