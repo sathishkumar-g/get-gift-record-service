@@ -1,0 +1,4 @@
+#Key and value types
+#Thu Jun 03 17:48:36 IST 2021
+valueType=com.sugysri.birthday.getgiftrecordservice.models.UserDetails
+keyType=java.lang.Integer

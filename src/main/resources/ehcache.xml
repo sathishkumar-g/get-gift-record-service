@@ -11,7 +11,18 @@
 
 	<cache-template name="default">
 		<expiry>
-			<ttl unit="seconds">600</ttl>
+			<ttl unit="seconds">86400</ttl>
+		</expiry>
+		<resources>
+			<heap>1000</heap>
+			<offheap unit="MB">10</offheap>
+			<disk persistent="true" unit="MB">20</disk>
+		</resources>
+	</cache-template>
+	
+	<cache-template name="gift-record">
+		<expiry>
+			<ttl unit="seconds">120</ttl>
 		</expiry>
 		<resources>
 			<heap>1000</heap>
@@ -20,15 +31,51 @@
 		</resources>
 	</cache-template>
 
-	<cache alias="giftRecordsCache" uses-template="default">
-		<!-- <key-type>java.lang.Long</key-type> -->
-		<value-type>com.sugysri.birthday.giftrecordservice.models.GiftRecord
+	<cache alias="giftRecordItemsCache" uses-template="default">
+		<key-type>java.lang.Integer</key-type>
+		<value-type>com.sugysri.birthday.getgiftrecordservice.models.GiftRecordItem
 		</value-type>
 	</cache>
 
 	<cache alias="userDetailsCache" uses-template="default">
-		<value-type>com.sugysri.birthday.giftrecordservice.models.UserDetails
+		<key-type>java.lang.Integer</key-type>
+		<value-type>com.sugysri.birthday.getgiftrecordservice.models.UserDetails
 		</value-type>
 	</cache>
+	
+	<cache alias="giftRecordCache" uses-template="gift-record">
+		<value-type>com.sugysri.birthday.getgiftrecordservice.models.GiftRecord
+		</value-type>
+	</cache>
+	
+	<!-- <cache alias="userDetailsCache">
+		<key-type>java.lang.Integer</key-type>
+		<value-type>com.sugysri.birthday.getgiftrecordservice.models.UserDetails
+		</value-type>
+		<expiry>
+			<ttl unit="seconds">1800</ttl>
+		</expiry>
+
+		<resources>
+			<heap>1000</heap>
+			<offheap unit="MB">10</offheap>
+			<disk persistent="true" unit="MB">20</disk>
+		</resources>
+	</cache>
+	
+	<cache alias="giftRecordsCache">
+		<key-type>java.lang.Integer</key-type>
+		<value-type>com.sugysri.birthday.getgiftrecordservice.models.GiftRecordItem
+		</value-type>
+		<expiry>
+			<ttl unit="seconds">1800</ttl>
+		</expiry>
+
+		<resources>
+			<heap>1000</heap>
+			<offheap unit="MB">10</offheap>
+			<disk persistent="true" unit="MB">20</disk>
+		</resources>
+	</cache> -->
 
 </config>

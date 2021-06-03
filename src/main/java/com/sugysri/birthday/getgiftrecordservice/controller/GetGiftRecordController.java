@@ -1,6 +1,8 @@
 package com.sugysri.birthday.getgiftrecordservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +20,7 @@ public class GetGiftRecordController {
 	@Autowired
 	private GetGiftRecordService getGiftRecordService;
 
+	@EventListener(classes = { ApplicationStartedEvent.class })
 	@RequestMapping("/get")
 	public GiftRecord getGiftRecord() {
 		return getGiftRecordService.getGiftRecord();

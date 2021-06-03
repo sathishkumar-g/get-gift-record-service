@@ -1,5 +1,7 @@
 package com.sugysri.birthday.getgiftrecordservice.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,15 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.cache.annotation.Cacheable;
-
 @Entity
 @Table(name = "sugysri_gift_records")
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class GiftRecordItem {
+public class GiftRecordItem implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gift_id_generator")
 	@SequenceGenerator(name = "gift_id_generator", sequenceName = "gift_record_sequence", allocationSize = 1, initialValue = 100)
