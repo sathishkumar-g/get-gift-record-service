@@ -17,19 +17,30 @@ import com.sugysri.birthday.getgiftrecordservice.models.UserDetails;
 import com.sugysri.birthday.getgiftrecordservice.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping(path = "/authenticate", consumes = "application/json", produces = "application/json")
-	public UserDetails getuserRecord(@RequestBody UserDetails userDetails) {
-		return userService.getUserRecord(userDetails);
-	}
+	/*
+	 * @PostMapping(path = "/authenticate", consumes = "application/json", produces
+	 * = "application/json") public UserDetails getuserRecord(@RequestBody
+	 * UserDetails userDetails) { return userService.getUserRecord(userDetails); }
+	 */
 
 	@EventListener(classes = { ApplicationStartedEvent.class })
 	public ResponseEntity<List<UserDetails>> getAllUserss() {
 		return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+	}
+	
+	@PostMapping(path = "/register", consumes = "application/json", produces = "application/json")
+	public UserDetails addGiftRecord(@RequestBody UserDetails userDetails) {
+		return userService.addUserRecord(userDetails);
+	}
+	
+	@PostMapping(path = "/authenticate", produces = "application/json")
+	public UserDetails getuserRecord(@RequestBody String userName) {
+		return userService.getUserRecord(userName);
 	}
 }

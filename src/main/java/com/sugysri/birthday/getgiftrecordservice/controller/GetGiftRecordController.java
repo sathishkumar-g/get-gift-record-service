@@ -15,7 +15,7 @@ import com.sugysri.birthday.getgiftrecordservice.service.GetGiftRecordService;
 
 @RestController
 @RequestMapping("/gift")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin
 public class GetGiftRecordController {
 	@Autowired
 	private GetGiftRecordService getGiftRecordService;

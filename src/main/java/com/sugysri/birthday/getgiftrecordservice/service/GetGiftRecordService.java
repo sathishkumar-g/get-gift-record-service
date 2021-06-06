@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import com.sugysri.birthday.getgiftrecordservice.models.Constants;
 import com.sugysri.birthday.getgiftrecordservice.models.GiftRecord;
 import com.sugysri.birthday.getgiftrecordservice.models.GiftRecordItem;
 import com.sugysri.birthday.getgiftrecordservice.repository.GiftRecordRepository;
@@ -26,7 +27,7 @@ public class GetGiftRecordService {
 	@Autowired
 	private GiftRecord giftRecord;
 
-	@Cacheable(value = "giftRecordCache")
+	@Cacheable(value = Constants.GIFT_RECORD_CACHE)
 	public GiftRecord getGiftRecord() {
 		List<GiftRecordItem> giftRecords = null;
 		giftRecords = giftRecordRepository.findAll();
@@ -35,18 +36,18 @@ public class GetGiftRecordService {
 		return giftRecord;
 	}
 
-	@CachePut(value = "giftRecordItemsCache", key = "#giftRecordItem.s_no")
+	@CachePut(value = Constants.GIFT_RECORD_ITEMS_CACHE, key = "#giftRecordItem.s_no")
 	public GiftRecordItem editGiftRecord(GiftRecordItem giftRecordItem) {
 		return giftRecordRepository.saveAndFlush(giftRecordItem);
 	}
 
-	@CacheEvict(value = "giftRecordItemsCache", key = "#giftRecordItem.s_no")
+	@CacheEvict(value = Constants.GIFT_RECORD_ITEMS_CACHE, key = "#giftRecordItem.s_no")
 	public void deleteGiftRecord(GiftRecordItem giftRecordItem) {
 		giftRecordRepository.delete(giftRecordItem);
 		giftRecordRepository.flush();
 	}
 
-	@CachePut(value = "giftRecordItemsCache", key = "#result.s_no")
+	@CachePut(value = Constants.GIFT_RECORD_ITEMS_CACHE, key = "#result.s_no")
 	public GiftRecordItem addGiftRecord(GiftRecordItem giftRecordItem) {
 		return giftRecordRepository.saveAndFlush(giftRecordItem);
 	}
@@ -58,12 +59,12 @@ public class GetGiftRecordService {
 	}
 
 	public void addToCache(GiftRecordItem giftRecordItem) {
-		Cache cache = cacheManager.getCache("giftRecordItemsCache");
+		Cache cache = cacheManager.getCache(Constants.GIFT_RECORD_ITEMS_CACHE);
 		cache.putIfAbsent(giftRecordItem.getSerialNumber(), giftRecordItem);
 	}
 
 	public void removeFromCache(GiftRecordItem giftRecordItem) {
-		Cache cache = cacheManager.getCache("giftRecordItemsCache");
+		Cache cache = cacheManager.getCache(Constants.GIFT_RECORD_ITEMS_CACHE);
 		cache.evictIfPresent(giftRecordItem.getSerialNumber());
 	}
 
